@@ -1,0 +1,5 @@
+.form {
+  display: flex;
+  justifyContent: space-between;
+  flexDirection: column;
+}

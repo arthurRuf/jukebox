@@ -1,0 +1,13 @@
+.card {border: 1px #CCC solid; padding: 8px; margin: 10px; }
+
+.cover{
+    height: 180px;
+    maxWidth: 180px;
+}
+
+
+.name {fontWeight: bold; display:block;}
+
+.artist {display:block;}
+
+.album {display:block;}
