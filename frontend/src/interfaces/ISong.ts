@@ -1,4 +1,3 @@
-
 export interface ISongWithoutId {
     name: string,
     artist: string,
@@ -8,6 +7,6 @@ export interface ISongWithoutId {
     notes?: string,
 }
 
-export interface ISong extends  ISongWithoutId {
+export interface ISong extends ISongWithoutId {
     id: string,
 }

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {ISong, ISongWithoutId} from "../interfaces/ISong";
-import './AddNewSong.css'
+import './AddNewSong.scss'
 
 interface IProps {
-    onAddNew: (newSong:ISong) =>  void,
+    onAddNew: (newSong: ISong) => void,
 }
 
-const initialFormValues :ISongWithoutId= {
+const initialFormValues: ISongWithoutId = {
     name: '',
     artist: '',
     album: '',
@@ -18,13 +18,15 @@ const initialFormValues :ISongWithoutId= {
 const AddNewSong: React.FC<IProps> = ({onAddNew}) => {
     const [formValues, setFormValues] = useState<ISongWithoutId>(initialFormValues)
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) :void=>{
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setFormValues((prevState: any) => ({
             ...prevState,
             [event.target.name]: event.target.value,
         }))
     }
-    const handleAddSong = ():void => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
+
         if (!formValues.name ||
             !formValues.artist ||
             !formValues.album ||
@@ -44,20 +46,26 @@ const AddNewSong: React.FC<IProps> = ({onAddNew}) => {
         setFormValues(initialFormValues);
     }
 
-    return (<div>
-        <h2>Add new Song</h2>
-        <div className="form">
-            <input type="text" placeholder="Name" name="name" value={formValues.name} onChange={handleChange} />
-        <input type="text" placeholder="Artist" name="artist" value={formValues.artist} onChange={handleChange} />
-        <input type="text" placeholder="Album" name="album" value={formValues.album} onChange={handleChange} />
-        <input type="text" placeholder="Cover URL" name="coverUrl" value={formValues.coverUrl} onChange={handleChange} />
-        <input type="number" placeholder="Release Year" name="releaseYear" value={formValues.releaseYear} onChange={handleChange} />
-            <textarea placeholder="Notes" name="notes" value={formValues.notes} onChange={handleChange} />
-            <div>
-                <button onClick={handleAddSong}>Add Song</button>
-            </div>
+    return (<div className="form-wrapper">
+        <h2>Add new song to the list</h2>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="name">Name</label>
+            <input type="text" name="name" value={formValues.name} onChange={handleChange}/>
+            <label htmlFor="artist">Artist</label>
+            <input type="text" name="artist" value={formValues.artist} onChange={handleChange}/>
+            <label htmlFor="album">Album</label>
+            <input type="text" name="album" value={formValues.album} onChange={handleChange}/>
+            <label htmlFor="coverUrl">Cover URL</label>
+            <input type="text" name="coverUrl" value={formValues.coverUrl} onChange={handleChange}/>
+            <label htmlFor="releaseYear">Release Ye</label>
+            <input type="number" name="releaseYear" value={formValues.releaseYear} onChange={handleChange}/>
+            <label htmlFor="notes">Notes</label>
+            <textarea name="notes" value={formValues.notes} onChange={handleChange}/>
 
-        </div>
+            <div>
+                <button type="submit">Add Song</button>
+            </div>
+        </form>
     </div>)
 }
 

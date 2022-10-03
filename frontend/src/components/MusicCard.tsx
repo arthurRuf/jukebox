@@ -1,12 +1,12 @@
 import React from 'react';
 import {ISong} from "../interfaces/ISong";
-import './MusicCard.css'
+import './MusicCard.scss'
 
 interface IProps {
     song: ISong
 }
 
-const MusicCard:  React.FC<IProps> = ({song}) => {
+const MusicCard: React.FC<IProps> = ({song}) => {
     return (
         <li className="card">
             <img src={song.coverUrl}
